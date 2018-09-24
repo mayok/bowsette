@@ -46,19 +46,20 @@ $choker-height: 10px;
 
 @mixin crown($v: 1) {
   position: absolute;
-  top: 20%;
   width: 0;
   height: 0;
   border-style: solid;
   z-index: 10;
+
+  top: 18%;
   @if $v == 1 {
-    left: 46.5%;
+    left: 37.5%;
     border-width: 0;
     border-width: $crown-width 0 0 $crown-width;
     border-color: transparent transparent transparent $crown;
     transform: rotate(-6deg);
   } @else if $v == 2 {
-    top: 21%;
+    top: 19%;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -68,56 +69,93 @@ $choker-height: 10px;
       calc(#{$crown-width / 2});
     border-color: transparent transparent $crown transparent;
   } @else {
-    right: 46.5%;
+    right: 37.5%;
     border-width: 0 0 $crown-width $crown-width;
     border-color: transparent transparent $crown transparent;
     transform: rotate(6deg);
   }
+
+  @media (min-width: 480px) {
+    top: 20%;
+    @if $v == 1 {
+      left: 46.5%;
+    } @else if $v == 2 {
+      top: 21%;
+    } @else {
+      right: 46.5%;
+    }
+  }
 }
 @mixin crowneye($position: left) {
   position: absolute;
-  top: 24.7%;
+  top: 23.2%;
   width: $crowneye-width;
   height: $crowneye-height;
   background: $crowneye;
   z-index: 20;
   @if $position == left {
-    left: 49%;
+    left: 47%;
   } @else {
-    right: 49%;
+    right: 47%;
+  }
+
+  @media (min-width: 480px) {
+    top: 24.7%;
+    @if $position == left {
+      left: 49%;
+    } @else {
+      right: 49%;
+    }
   }
 }
 
 @mixin crownmash() {
   position: absolute;
-  top: 22%;
+  top: 20.5%;
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: $crownmash-width;
+  width: calc(#{$crownmash-width} - 4px);
   height: $crownmash-height;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
   background: $crownmash;
   z-index: 5;
+  @media (min-width: 480px) {
+    top: 22%;
+    width: $crownmash-width;
+  }
 }
 
 @mixin horns($position: left) {
   position: absolute;
-  top: 21%;
+  top: 16%;
   width: $horn-width;
   height: $horn-height;
   background: $horn;
   @if $position == left {
-    left: 39%;
+    left: 22%;
     border-bottom-left-radius: 88%;
     border-bottom-right-radius: 22%;
     transform: rotate(22deg);
   } @else {
-    right: 39%;
+    right: 22%;
     border-bottom-right-radius: 88%;
     border-bottom-left-radius: 22%;
     transform: rotate(-22deg);
+  }
+
+  @media (min-width: 480px) {
+    top: 19.5%;
+    @if $position == left {
+      left: 42%;
+      border-bottom-left-radius: 88%;
+      border-bottom-right-radius: 22%;
+    } @else {
+      right: 42%;
+      border-bottom-right-radius: 88%;
+      border-bottom-left-radius: 22%;
+    }
   }
 }
 
@@ -139,34 +177,54 @@ $choker-height: 10px;
 
 @mixin eyes($position: left) {
   position: absolute;
-  top: 43%;
+  top: 53%;
   width: $eye-width;
   height: $eye-height;
   background: $eye;
   border-radius: calc(#{$eye-width} / 2);
   @if $position == left {
-    left: 29%;
+    left: 24%;
   } @else {
-    right: 29%;
+    right: 24%;
+  }
+
+  @media (min-width: 480px) {
+    top: 41%;
+    @if $position == left {
+      left: 32%;
+    } @else {
+      right: 32%;
+    }
   }
 }
 @mixin eyebrows($position: left) {
   position: absolute;
-  top: 40%;
+  top: 50%;
   width: $ebrow-width;
-  height: $ebrow-height;
+  height: calc(#{$ebrow-height} - 2px);
   background: $eyebrow;
   @if $position == left {
-    left: 30.5%;
+    left: 25.5%;
     transform: skew(80deg);
   } @else {
-    right: 30.5%;
+    right: 25.5%;
     transform: skew(-80deg);
+  }
+
+  @media (min-width: 480px) {
+    top: 39%;
+    @if $position == left {
+      left: 30.5%;
+      transform: skew(80deg);
+    } @else {
+      right: 30.5%;
+      transform: skew(-80deg);
+    }
   }
 }
 @mixin cheeks($p: left, $v: 18%) {
   position: absolute;
-  top: 51%;
+  top: 63%;
   width: $cheek-width;
   height: $cheek-height;
   background: $cheek;
@@ -177,13 +235,21 @@ $choker-height: 10px;
   } @else {
     right: $v;
   }
+  @media (min-width: 480px) {
+    top: 48%;
+    @if $p == left {
+      left: calc(#{$v} + 5%);
+    } @else {
+      right: calc(#{$v} + 5%);
+    }
+  }
 }
 
 @mixin mouth() {
   position: absolute;
-  top: 55%;
+  top: 67%;
   width: $mouth-width;
-  height: $mouth-height;
+  height: calc(#{$mouth-height} - 10px);
   background: $mouth;
   left: 0;
   right: 0;
@@ -192,6 +258,10 @@ $choker-height: 10px;
   border-top-left-radius: 4%;
   border-bottom-left-radius: 40%;
   border-bottom-right-radius: 40%;
+  @media (min-width: 480px) {
+    top: 50%;
+    height: $mouth-height;
+  }
 }
 
 @mixin fangs($position: left, $v: 0%) {
@@ -212,7 +282,7 @@ $choker-height: 10px;
 
 @mixin choker($pseudo: true) {
   position: absolute;
-  top: 68%;
+  top: 81%;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -227,6 +297,13 @@ $choker-height: 10px;
     background: $hair;
   } @else {
     background: $choker;
+  }
+
+  @media (min-width: 480px) {
+    top: 60.3%;
+    @if $pseudo == true {
+      top: 0;
+    }
   }
 }
 
@@ -261,11 +338,21 @@ body,
   background: $hair;
 }
 
-.face {
-  position: relative;
-  width: $face-width;
-  height: $face-height;
-  margin: 0 auto;
+@media (min-width: 300px) {
+  .face {
+    position: relative;
+    width: 300px;
+    height: 420px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 480px) {
+  .face {
+    position: relative;
+    width: $face-width;
+    height: $face-height;
+    margin: 0 auto;
+  }
 }
 
 .crown {
