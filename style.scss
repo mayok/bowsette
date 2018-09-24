@@ -1,0 +1,388 @@
+$hair: lighten(yellow, 20%);
+$face-width: 480px;
+$face-height: 640px;
+
+$crown: #ffea00;
+$crown-width: 50px;
+
+$crownmash: pink;
+$crownmash-width: 80px;
+$crownmash-height: 30px;
+
+$crowneye: black;
+$crowneye-width: 2px;
+$crowneye-height: 6px;
+
+$horn: white;
+$horn-width: 60px;
+$horn-height: 85px;
+$_horn-width: calc(#{$horn-width} * 2);
+$_horn-height: $horn-height;
+
+$eye: rgb(155, 226, 253);
+$eye-width: 35px;
+$eye-height: $eye-width;
+
+$eyebrow: darken($hair, 5%);
+$eyebrow: $crown;
+$ebrow-width: 28px;
+$ebrow-height: $eye-height / 3;
+
+$cheek: #f2d5cc;
+$cheek-height: $eye-height / 8;
+$cheek-width: 3px;
+
+$mouth: lighten(pink, 7%);
+$mouth-width: 120px;
+$mouth-height: 60px;
+
+$fang: white;
+$fang-width: 10px;
+$fang-height: 20px;
+
+$choker: black;
+$choker-width: 160px;
+$choker-height: 10px;
+
+@mixin crown($v: 1) {
+  position: absolute;
+  top: 20%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  z-index: 10;
+  @if $v == 1 {
+    left: 46.5%;
+    border-width: 0;
+    border-width: $crown-width 0 0 $crown-width;
+    border-color: transparent transparent transparent $crown;
+    transform: rotate(-6deg);
+  } @else if $v == 2 {
+    top: 21%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-width: 0
+      calc(#{$crown-width / 2})
+      calc(#{$crown-width / 2 * 1.73205})
+      calc(#{$crown-width / 2});
+    border-color: transparent transparent $crown transparent;
+  } @else {
+    right: 46.5%;
+    border-width: 0 0 $crown-width $crown-width;
+    border-color: transparent transparent $crown transparent;
+    transform: rotate(6deg);
+  }
+}
+@mixin crowneye($position: left) {
+  position: absolute;
+  top: 24.7%;
+  width: $crowneye-width;
+  height: $crowneye-height;
+  background: $crowneye;
+  z-index: 20;
+  @if $position == left {
+    left: 49%;
+  } @else {
+    right: 49%;
+  }
+}
+
+@mixin crownmash() {
+  position: absolute;
+  top: 22%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: $crownmash-width;
+  height: $crownmash-height;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  background: $crownmash;
+  z-index: 5;
+}
+
+@mixin horns($position: left) {
+  position: absolute;
+  top: 21%;
+  width: $horn-width;
+  height: $horn-height;
+  background: $horn;
+  @if $position == left {
+    left: 39%;
+    border-bottom-left-radius: 88%;
+    border-bottom-right-radius: 22%;
+    transform: rotate(22deg);
+  } @else {
+    right: 39%;
+    border-bottom-right-radius: 88%;
+    border-bottom-left-radius: 22%;
+    transform: rotate(-22deg);
+  }
+}
+
+@mixin _horns($position: left) {
+  content: "";
+  position: absolute;
+  top: calc(-1 * #{$horn-height} / 2);
+  width: $_horn-width;
+  height: $_horn-height;
+  background: $hair;
+  @if $position == left {
+    left: 2%;
+    border-bottom-left-radius: 50%;
+  } @else {
+    right: 2%;
+    border-bottom-right-radius: 50%;
+  }
+}
+
+@mixin eyes($position: left) {
+  position: absolute;
+  top: 43%;
+  width: $eye-width;
+  height: $eye-height;
+  background: $eye;
+  border-radius: calc(#{$eye-width} / 2);
+  @if $position == left {
+    left: 29%;
+  } @else {
+    right: 29%;
+  }
+}
+@mixin eyebrows($position: left) {
+  position: absolute;
+  top: 40%;
+  width: $ebrow-width;
+  height: $ebrow-height;
+  background: $eyebrow;
+  @if $position == left {
+    left: 30.5%;
+    transform: skew(80deg);
+  } @else {
+    right: 30.5%;
+    transform: skew(-80deg);
+  }
+}
+@mixin cheeks($p: left, $v: 18%) {
+  position: absolute;
+  top: 51%;
+  width: $cheek-width;
+  height: $cheek-height;
+  background: $cheek;
+  transform: skewX(-30deg);
+
+  @if $p == left {
+    left: $v;
+  } @else {
+    right: $v;
+  }
+}
+
+@mixin mouth() {
+  position: absolute;
+  top: 55%;
+  width: $mouth-width;
+  height: $mouth-height;
+  background: $mouth;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-top-left-radius: 4%;
+  border-top-left-radius: 4%;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
+}
+
+@mixin fangs($position: left, $v: 0%) {
+  position: absolute;
+  top: 0%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: $fang-height $fang-width 0 $fang-width;
+  border-color: $fang transparent transparent transparent;
+
+  @if $position == left {
+    left: $v;
+  } @else {
+    right: $v;
+  }
+}
+
+@mixin choker($pseudo: true) {
+  position: absolute;
+  top: 68%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: $choker-width;
+  height: $choker-height;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+
+  @if $pseudo == true {
+    top: 0;
+    margin: calc(-1 * #{$choker-height} / 2) auto 0;
+    background: $hair;
+  } @else {
+    background: $choker;
+  }
+}
+
+@mixin choker-accent($position: left, $v: 0, $padding: no) {
+  position: absolute;
+  top: 4px;
+  width: calc(#{$choker-height} / 2);
+  height: calc(#{$choker-height} / 2);
+  background: white;
+  border-radius: 50%;
+  @if $position == left {
+    left: $v;
+  } @else {
+    right: $v;
+  }
+  @if $padding != no {
+    top: 5px;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+.bowsette {
+  height: 100%;
+}
+.bowsette {
+  background: $hair;
+}
+
+.face {
+  position: relative;
+  width: $face-width;
+  height: $face-height;
+  margin: 0 auto;
+}
+
+.crown {
+  .mash {
+    @include crownmash();
+  }
+  .crown1 {
+    @include crown(1);
+  }
+  .crown2 {
+    @include crown(2);
+  }
+  .crown3 {
+    @include crown(3);
+  }
+  .eye1 {
+    @include crowneye(left);
+  }
+  .eye2 {
+    @include crowneye(right);
+  }
+}
+
+.horns {
+  .left {
+    @include horns(left);
+    &:before {
+      @include _horns(left);
+    }
+  }
+  .right {
+    @include horns(right);
+    &:before {
+      @include _horns(right);
+    }
+  }
+}
+
+.eyes {
+  .left {
+    @include eyes(left);
+  }
+  .right {
+    @include eyes(right);
+  }
+}
+.eyebrows {
+  .left {
+    @include eyebrows(left);
+  }
+  .right {
+    @include eyebrows(right);
+  }
+}
+.cheeks {
+  .left1 {
+    @include cheeks(left, 22%);
+  }
+  .left2 {
+    @include cheeks(left, 24%);
+  }
+  .left3 {
+    @include cheeks(left, 27%);
+  }
+  .left4 {
+    @include cheeks(left, 29%);
+  }
+
+  .right1 {
+    @include cheeks(right, 31%);
+  }
+  .right2 {
+    @include cheeks(right, 29%);
+  }
+  .right3 {
+    @include cheeks(right, 26%);
+  }
+  .right4 {
+    @include cheeks(right, 24%);
+  }
+}
+
+.mouth {
+  @include mouth();
+}
+
+.fang1 {
+  @include fangs(left, 0%);
+}
+.fang2 {
+  @include fangs(left, 18%);
+}
+.fang3 {
+  @include fangs(right, 0%);
+}
+.fang4 {
+  @include fangs(right, 20%);
+}
+
+.choker {
+  @include choker(false);
+
+  &:before {
+    content: "";
+    @include choker(true);
+  }
+
+  &-accent1 {
+    @include choker-accent(left, 15%);
+  }
+  &-accent2 {
+    @include choker-accent(left, 38%, pad);
+  }
+  &-accent3 {
+    @include choker-accent(right, 15%);
+  }
+  &-accent4 {
+    @include choker-accent(right, 38%, pad);
+  }
+}
