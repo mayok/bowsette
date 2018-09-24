@@ -338,20 +338,22 @@ body,
   background: $hair;
 }
 
-@media (min-width: 300px) {
+.face {
+  position: relative;
+  width: 300px;
+  height: 370px;
+  margin: 0 auto;
+}
+@media (min-width: 300px) and (min-height: 600px) {
   .face {
-    position: relative;
     width: 300px;
     height: 420px;
-    margin: 0 auto;
   }
 }
 @media (min-width: 480px) {
   .face {
-    position: relative;
     width: $face-width;
     height: $face-height;
-    margin: 0 auto;
   }
 }
 
